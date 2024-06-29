@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">FestaFimDeAno</string>
+    <string name="dias_restantes">Dias restantes para o fim do ano</string>
 </resources>
