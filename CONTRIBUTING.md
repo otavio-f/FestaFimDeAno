@@ -1,6 +1,6 @@
 #Linguagem
 
-Priorize o uso de __português brasileiro__, exceto quando termos não possuírem tradução equivalente ou quando o uso da lingua inglesa for obrigatório
+Use __somente inglês__ em código. Priorize o uso de __português brasileiro__ em outros locais não necessariamente código, exceto quando termos não possuírem tradução equivalente ou quando o uso da lingua inglesa for obrigatório
 
 #Commits
 
