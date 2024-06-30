@@ -13,6 +13,7 @@ import java.util.Calendar;
 import java.util.Locale;
 
 import br.otaviof.festafimdeano.R;
+import br.otaviof.festafimdeano.data.Preferences;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -20,14 +21,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static final Calendar CALENDAR = Calendar.getInstance();
 
     private final ViewHolder mViewHolder = new ViewHolder();
-
+    private Preferences mPreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        this.mPreferences = new Preferences(this);
+
         this.mViewHolder.today = findViewById(R.id.text_today);
         this.mViewHolder.daysLeft = findViewById(R.id.text_days_left);
+
         this.mViewHolder.confirm = findViewById(R.id.button_confirm);
+        int confirmTextId;
+        if(!this.mPreferences.getAttendIsSet())
+            confirmTextId = R.string.not_confirmed;
+        else
+            confirmTextId = this.mPreferences.getAttend()? R.string.going: R.string.not_going;
+        this.mViewHolder.confirm.setText(getString(confirmTextId));
 
         this.mViewHolder.confirm.setOnClickListener(this);
         this.mViewHolder.today.setText(DATE_FORMAT.format(CALENDAR.getTime()));
@@ -40,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         int max = CALENDAR.getActualMaximum(Calendar.DAY_OF_YEAR);
         return max-today;
     }
+
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.button_confirm) {
