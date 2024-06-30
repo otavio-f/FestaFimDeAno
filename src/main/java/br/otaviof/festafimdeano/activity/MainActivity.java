@@ -2,10 +2,12 @@ package br.otaviof.festafimdeano.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.text.SimpleDateFormat;
@@ -33,17 +35,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         this.mViewHolder.daysLeft = findViewById(R.id.text_days_left);
 
         this.mViewHolder.confirm = findViewById(R.id.button_confirm);
-        int confirmTextId;
-        if(!this.mPreferences.getAttendIsSet())
-            confirmTextId = R.string.not_confirmed;
-        else
-            confirmTextId = this.mPreferences.getAttend()? R.string.going: R.string.not_going;
-        this.mViewHolder.confirm.setText(getString(confirmTextId));
 
         this.mViewHolder.confirm.setOnClickListener(this);
         this.mViewHolder.today.setText(DATE_FORMAT.format(CALENDAR.getTime()));
         String daysLeft = String.format(Locale.US, "%d %s", getDaysLeft(), getString(R.string.days));
         this.mViewHolder.daysLeft.setText(daysLeft);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        int confirmTextId;
+        if(!this.mPreferences.getAttendIsSet())
+            confirmTextId = R.string.not_confirmed;
+        else
+            confirmTextId = this.mPreferences.getAttend() ? R.string.going : R.string.not_going;
+        this.mViewHolder.confirm.setText(getString(confirmTextId));
     }
 
     private int getDaysLeft() {
