@@ -8,10 +8,18 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
+
 import br.otaviof.festafimdeano.R;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    private ViewHolder mViewHolder = new ViewHolder();
+
+    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy", Locale.US);
+    private static final Calendar CALENDAR = Calendar.getInstance();
+
+    private final ViewHolder mViewHolder = new ViewHolder();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,8 +30,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         this.mViewHolder.confirm = findViewById(R.id.button_confirm);
 
         this.mViewHolder.confirm.setOnClickListener(this);
+        this.mViewHolder.today.setText(DATE_FORMAT.format(CALENDAR.getTime()));
+        String daysLeft = String.format(Locale.US, "%d %s", getDaysLeft(), getString(R.string.days));
+        this.mViewHolder.daysLeft.setText(daysLeft);
     }
 
+    private int getDaysLeft() {
+        int today = CALENDAR.get(Calendar.DAY_OF_YEAR);
+        int max = CALENDAR.getActualMaximum(Calendar.DAY_OF_YEAR);
+        return max-today;
+    }
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.button_confirm) {

@@ -2,4 +2,5 @@
     <string name="app_name">FestaFimDeAno</string>
     <string name="dias_restantes">Dias restantes para o fim do ano</string>
     <string name="text_question_attend">Você vai participar?</string>
+    <string name="days">dias</string>
 </resources>
