@@ -8,9 +8,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import br.otaviof.festafimdeano.R;
 import br.otaviof.festafimdeano.data.Preferences;
 
+/** Classe responsável pela interface de comfirmação
+ * @author otavio-f
+ * @version 1
+ */
 public class DetailsActivity extends AppCompatActivity implements View.OnClickListener {
     private final ViewHolder mViewHolder = new ViewHolder();
     private Preferences mPreferences;
+
+    /**
+     * Executa a criação dessa Intent e sua interface
+     * @param savedInstanceState If the activity is being re-initialized after
+     *     previously being shut down then this Bundle contains the data it most
+     *     recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
+     *
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +35,10 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
         this.mViewHolder.willAttend.setChecked(this.mPreferences.getAttend());
     }
 
+    /**
+     * Processa eventos de clique
+     * @param v O elemento clicado
+     */
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.check_attend) {
@@ -31,7 +47,11 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
+    /**
+     * Classe que contém os elementos da interface
+     */
     private static class ViewHolder {
+        /** Marcador que indica se o usuário irá comparecer **/
         CheckBox willAttend;
     }
 }
